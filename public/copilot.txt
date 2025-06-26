@@ -1,0 +1,6 @@
+In javascript fai in modo tale che quando viene cliccata una tendina a scelta tra <div class="menu">
+            <a href="#home" id="menu-home">Home</a>
+            <a href="#services" id="menu-services">Servizi</a>
+            <a href="#contacts" id="menu-contacts">Contatti</a>
+            <a href="#about" id="menu-about">Chi siamo</a>
+        </div> se viene scelto "Home" mostra le immagini e le relative immagini, a "Servizi" venga chiamata la prenotazione a Contatti esca l'email "

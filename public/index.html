@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <title>Salento JS - Prenotazione</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #fefefe;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #00695c;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 10px;
+        }
+        nav button {
+            color: white;
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        nav button:hover {
+            background-color: #555;
+        }
+        .section {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .info-box, .form-box {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: #e8f5e9;
+        }
+        #gallery img {
+            max-width: 150px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .form-box input, .form-box textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .form-box label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-box button {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .form-box button:hover {
+            background-color: #004d40;
+        }
+    </style>
+    <script>
+        function cambiaLinguaGoogleTranslate(lang) {
+            const gtFrame = document.querySelector("iframe.goog-te-banner-frame");
+            if (!gtFrame) {
+                const select = document.querySelector(".goog-te-combo");
+                if (select) {
+                    select.value = lang;
+                    select.dispatchEvent(new Event("change"));
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Benvenuti nel cuore del Salento</h1>
+    <nav>
+        <button onclick="showSection('home')">Home</button>
+        <button onclick="showSection('prenota')">Prenota</button>
+        <button onclick="showSection('info')">Info</button>
+        <button onclick="showSection('contatti')">Contatti</button>
+        <select onchange="cambiaLinguaGoogleTranslate(this.value)">
+            <option value="it">🇮🇹 Italiano</option>
+            <option value="en">🇬🇧 English</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="de">🇩🇪 Deutsch</option>
+        </select>
+    </nav>
+    <div id="home" class="section active">
+        <div class="info-box">
+            <p>Scopri le bellezze del Salento:</p>
+            <div id="gallery"></div>
+        </div>
+    </div>
+    <div id="prenota" class="section">
+        <div class="form-box">
+            <h2>Prenota ora</h2>
+            <form id="prenotazione-form">
+                <label for="partenza">Partenza</label>
+                <input type="text" id="partenza" required />
+                <label for="Num_fermate">Numero fermate desiderate</label>
+                <input type="number" id="Num_fermate" required />
+                <label for="fermate">Elenco fermate desiderate (una per riga con -)</label>
+                <textarea id="fermate" rows="5" required></textarea>
+                <label for="destinazione">Destinazione</label>
+                <input type="text" id="destinazione" required />
+                <label for="periodo">Periodo (gg/mm/aa)</label>
+                <input type="text" id="periodo" placeholder="gg/mm/aa" required />
+                <label for="viaggiatori">Numero di viaggiatori</label>
+                <input type="number" id="viaggiatori" min="1" required />
+                <label for="contatto">Telefono (facoltativo)</label>
+                <input type="tel" id="contatto" placeholder="Es. 3281234567" />
+                <label for="emailMittente">Email mittente</label>
+                <input type="email" id="emailMittente" required />
+                <button type="submit">Prenota ora</button>
+            </form>
+        </div>
+    </div>
+    <div id="info" class="section">
+        <div class="info-box">
+            <p>Il Salento è una penisola meravigliosa a sud della Puglia...</p>
+        </div>
+    </div>
+    <div id="contatti" class="section">
+        <div class="info-box">
+            <p>Per info scrivi a: davidetotaro1978@gmail.com</p>
+        </div>
+    </div>
+    <script>
+        const immagini = [
+            "Immagini/alberobello.jpg",
+            "Immagini/Castello_Gallipoli.jpg",
+            "Immagini/Gallipoli.jpg",
+            "Immagini/salento.jpg",
+            "Immagini/Spiaggia_Della_Purità.jpg"
+        ];
+        const descrizioni = [
+            "Alberobello",
+            "Castello di Gallipoli",
+            "Gallipoli",
+            "Salento",
+            "Spiaggia della Purità"
+        ];
+        const gallery = document.getElementById("gallery");
+        immagini.forEach((src, i) => {
+            const img = document.createElement("img");
+            img.src = src;
+            img.alt = descrizioni[i];
+            gallery.appendChild(img);
+        });
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+        document.getElementById("prenotazione-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const numFermate = parseInt(document.getElementById("Num_fermate").value.trim(), 10);
+            const testoFermate = document.getElementById("fermate").value.trim();
+            const fermateEffettive = testoFermate.split("\n").filter(riga => riga.trim().startsWith("-")).length;
+            if (fermateEffettive > numFermate) {
+                alert("Hai inserito più fermate di quelle indicate.");
+                return;
+            }
+            const dati = {
+                partenza: document.getElementById("partenza").value.trim(),
+                Num_fermate: numFermate,
+                fermate: testoFermate,
+                destinazione: document.getElementById("destinazione").value.trim(),
+                periodo: document.getElementById("periodo").value.trim(),
+                viaggiatori: document.getElementById("viaggiatori").value.trim(),
+                contatto: document.getElementById("contatto").value.trim(),
+                emailMittente: document.getElementById("emailMittente").value.trim()
+            };
+            const conferma = confirm("Confermi di voler inviare la prenotazione?");
+            if (!conferma) return;
+            fetch("http://www.prenotazionesalento.com:3000/invia-prenotazione", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(dati)
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+                if (data.message.toLowerCase().includes("successo")) {
+                    alert("Prenotazione inviata con successo!");
+                    document.getElementById("prenotazione-form").reset();
+                }
+            })
+            .catch(() => {
+                alert("Errore di rete o server non raggiungibile.");
+            });
+        });
+    </script>
+    <div id="google_translate_element" style="display:none;"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'it' }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
