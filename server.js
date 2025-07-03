@@ -11,33 +11,25 @@ app.post('/invia-prenotazione', (req, res) => {
     const dati = req.body;
     const oggi = new Date();
     const dataViaggio = dati.periodo || `${oggi.getDate()}/${oggi.getMonth() + 1}/${oggi.getFullYear()}`;
-    const nomeFile = 'prenotazionedata.txt';
-    const riga = `
------ Prenotazione del ${dataViaggio} -----
-Partenza: ${dati.partenza}
-Numero fermate: ${dati.Num_fermate}
-Fermate: ${dati.fermate}
-Destinazione: ${dati.destinazione}
-Periodo: ${dati.periodo}
-Viaggiatori: ${dati.viaggiatori}
-Telefono: ${dati.contatto || 'Non fornito'}
-Email mittente: ${dati.emailMittente}
--------------------------------------------
-`;
     fs.appendFile(nomeFile, riga, (err) => {
         if (err) return res.status(500).json({ message: "Errore nel salvataggio dei dati." });
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'TUO_EMAIL@gmail.com',
-                pass: 'LA_TUA_PASSWORD_O_APP_PASSWORD'
+                user: 'prenotazionesalento@gmail.com',
+                pass: 'fgebwhopnebrtmsv'
             }
         });
         const mailOptions = {
-            from: 'TUO_EMAIL@gmail.com',
-            to: dati.emailMittente,
+            from: dati.emailMittente,
+            to: 'prenotazionesalento@gmail.com',
             subject: 'Conferma Prenotazione Salento',
-            text: riga
+            attachments: [
+                {
+                    filename: 'prenotazione'+dataViaggio+'.txt',
+                    path: __dirname + '/prenotazionedata.txt'
+                }
+            ]
         };
         transporter.sendMail(mailOptions, (error) => {
             if (error) {

@@ -77,18 +77,6 @@
             background-color: #004d40;
         }
     </style>
-    <script>
-        function cambiaLinguaGoogleTranslate(lang) {
-            const gtFrame = document.querySelector("iframe.goog-te-banner-frame");
-            if (!gtFrame) {
-                const select = document.querySelector(".goog-te-combo");
-                if (select) {
-                    select.value = lang;
-                    select.dispatchEvent(new Event("change"));
-                }
-            }
-        }
-    </script>
 </head>
 <body>
     <h1>Benvenuti nel cuore del Salento</h1>
@@ -116,9 +104,9 @@
             <form id="prenotazione-form">
                 <label for="partenza">Partenza</label>
                 <input type="text" id="partenza" required />
-                <label for="Num_fermate">Numero fermate desiderate</label>
+                <label for="Num_fermate">Numero fermate desiderate (scrivere 0 se non ci sono)</label>
                 <input type="number" id="Num_fermate" required />
-                <label for="fermate">Elenco fermate desiderate (una per riga con -)</label>
+                <label for="fermate">Elenco fermate desiderate (una per riga con -) o barrare</label>
                 <textarea id="fermate" rows="5" required></textarea>
                 <label for="destinazione">Destinazione</label>
                 <input type="text" id="destinazione" required />
@@ -141,9 +129,20 @@
     </div>
     <div id="contatti" class="section">
         <div class="info-box">
-            <p>Per info scrivi a: davidetotaro1978@gmail.com</p>
+            <p>Per info scrivi a: prenotazionesalento@gmail.com</p>
         </div>
     </div>
+    <div id="google_translate_element"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'it',
+                includedLanguages: 'en,it,fr,de,es',
+                layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
+            }, 'google_translate_element');
+        }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script>
         const immagini = [
             "Immagini/alberobello.jpg",
@@ -191,7 +190,7 @@
             };
             const conferma = confirm("Confermi di voler inviare la prenotazione?");
             if (!conferma) return;
-            fetch("http://www.prenotazionesalento.com:3000/invia-prenotazione", {
+            fetch("http://localhost:3000/invia-prenotazione", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dati)
@@ -207,14 +206,8 @@
             .catch(() => {
                 alert("Errore di rete o server non raggiungibile.");
             });
+            
         });
     </script>
-    <div id="google_translate_element" style="display:none;"></div>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({ pageLanguage: 'it' }, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

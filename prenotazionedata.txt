@@ -1,0 +1,65 @@
+
+----- Prenotazione del 25/11/2025 -----
+Partenza: Casarano
+Numero fermate: 2
+Fermate: Melissano
+Taviano
+Destinazione: Lecce
+Periodo: 25/11/2025
+Viaggiatori: 345
+Telefono: 3892066393
+Email mittente: samueletotaro793@gmail.com
+-------------------------------------------
+
+----- Prenotazione del 25/11/2025 -----
+Partenza: Casarano
+Numero fermate: 2
+Fermate: Melissano
+Taviano
+Destinazione: Lecce
+Periodo: 25/11/2025
+Viaggiatori: 345
+Telefono: 3892066393
+Email mittente: samueletotaro793@gmail.com
+-------------------------------------------
+
+----- Prenotazione del 25/11/25 -----
+Partenza: Casarano
+Numero fermate: 4
+Fermate: Melissano
+Racale
+Alliste
+Taviano
+Destinazione: Lecce
+Periodo: 25/11/25
+Viaggiatori: 50
+Telefono: 3892066393
+Email mittente: samueletotaro793@gmail.com
+-------------------------------------------
+
+----- Prenotazione del 25/11/25 -----
+Partenza: Casarano
+Numero fermate: 4
+Fermate: Melissano
+Racale
+Alliste
+Taviano
+Destinazione: Lecce
+Periodo: 25/11/25
+Viaggiatori: 60
+Telefono: Non fornito
+Email mittente: samueletotaro793@gmail.com
+-------------------------------------------
+
+----- Prenotazione del 25/11/25 -----
+Partenza: Casarano
+Numero fermate: 3
+Fermate: Melissano
+Racale
+Taviano
+Destinazione: Paris
+Periodo: 25/11/25
+Viaggiatori: 350
+Telefono: Non fornito
+Email mittente: samueletotaro793@gmail.com
+-------------------------------------------
